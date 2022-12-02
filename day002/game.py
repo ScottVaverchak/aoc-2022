@@ -1,6 +1,9 @@
 conditions = {
+    # Lose this round
     1: lambda x: ((x - 1 + 2) % 3) + 1,
+    # Draw this round
     2: lambda x: x,
+    # Win this round
     3: lambda x: ((x - 1 + 1) % 3) + 1
 }
 
@@ -16,8 +19,7 @@ class Game:
        self.input = [(x[0], conditions[x[1]](x[0])) for x in self.input]
 
     def play(self) -> tuple[int, int]:
-        test = list(map(sum, zip(*[self._hand_points(x) for x in self.input])))
-        return (test[0], test[1])
+        return tuple(list(map(sum, zip(*[self._hand_points(x) for x in self.input]))))
 
     def _hand_points(self, input: tuple[int, int]) -> tuple[int, int]:
         match input: 
